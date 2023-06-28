@@ -83,7 +83,7 @@ void calculate(int n)
 				occupys[tags[x][y]][i] = 1;
 				calculate(n + 1);//继续递归求解
 				//求解完毕，层层回退
-				if (aflag != 0)
+				if (aflag == 2)
 					return;
 				//还原
 				answer[x][y] = 0;
