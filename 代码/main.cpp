@@ -1,6 +1,6 @@
 #include<iostream>
 #include "zhongju.h"
-
+#include "qiujie.h"
 using namespace std;
 
 /*
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 	}
 	else if (strcmp(argv[1], "-s") == 0)
 	{
-		cout << "求解数独指令暂未实现，敬请期待" << endl;
+		solve_shudu(argv[2]);
 	}
 	else if (strcmp(argv[1], "-n") == 0)
 	{
