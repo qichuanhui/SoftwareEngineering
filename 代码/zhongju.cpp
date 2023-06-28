@@ -1,5 +1,7 @@
 #include"zhongju.h"
 
+static char buffer[165000000];//缓冲字符
+static int pos;//缓冲字符串的当前写入位置
 
 int init[9] = { 1, 2, 3 ,4, 5, 6, 7, 8, 9 };//第1行的初始排列
 //通过第1行的各列右移，1-3行、4-6行、7-9行各6次变换
@@ -7,7 +9,7 @@ int row_trans_13[6][3] = { {0, 3, 6}, {0, 6, 3}, {3, 0, 6}, {3, 6, 0}, {6, 0, 3}
 int row_trans_46[6][3] = { {1, 4, 7}, {1, 7, 4}, {4, 1, 7}, {4, 7, 1}, {7, 1, 4}, {7, 4, 1} };//生成4-6行的右移列数
 int row_trans_79[6][3] = { {2, 5, 8}, {2, 8, 5}, {5, 2, 8}, {5, 8, 2}, {8, 2, 5}, {8, 5, 2} };//生成7-9行的右移列数
 
-static void Init()
+static void init_rows()
 {
 	init[0] = 1;
 	init[1] = 2;
@@ -62,18 +64,18 @@ void translate_row(int trans_13, int trans_46, int trans_79, bool flag)//
 		buffer[pos++] = '\n';
 }
 
-void create_shudu(int n)
+bool create_shudu(int n,string name)
 {
 	/* n:需生成的终局个数 */
-	ofstream out("shudu.txt");//打开文件
+	ofstream out(name);//打开文件
 	if (!out)
 	{
 		cout << "Open File Failed!" << endl;
-		return;
+		return false;
 	}
 	memset(buffer, ' ', sizeof(buffer));
 	pos = 0;
-	Init();
+	init_rows();
 	int num = 0;//已生成的终局个数
 	do
 	{
@@ -94,8 +96,7 @@ void create_shudu(int n)
 						out.write(buffer, pos - 1);
 						out.clear();
 						out.close();
-						cout << "创建数独终局成功" << endl;
-						return;
+						return true;
 					}
 				}
 			}

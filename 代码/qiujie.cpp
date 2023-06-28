@@ -4,7 +4,7 @@ static char buffer[165000000];//输出字符串缓冲区
 static int pos;//输出字符串的当前写入位置
 
 int map[9][9];
-bool flag;//求解完毕标志
+int flag;//求解完毕标志
 int tag[9][9] =
 {
 	{0, 0, 0, 1, 1, 1, 2, 2, 2},
@@ -22,7 +22,7 @@ int occupy[9][10];
 //变量初始化
 void init_shudu()
 {
-	flag = false;
+	flag = 0;
 	memset(occupy, 0, sizeof(occupy));
 	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 9; j++)
@@ -39,7 +39,6 @@ void init_shudu()
 
 bool check(int n, int key)
 {
-	cout << key << endl;;
 	/*检查当前方格是否可进行填充
 	  n:	当前方格的序号
 	  key： 填充该方格的数字*/
@@ -47,7 +46,7 @@ bool check(int n, int key)
 	int y = n % 9;//列号
 	for (int i = 0; i < 9; i++)
 	{
-		cout << map[x][i] << " " << map[i][y] << endl;
+		//cout << map[x][i] << " " << map[i][y] << endl;
 		if (map[x][i] == key)return false;
 		else if (map[i][y] == key)return false;
 	}
@@ -59,7 +58,7 @@ void calculation(int n)
 {
 	if (n > 80)//已到达最后的小格子
 	{
-		flag = true;
+		flag++;
 		return;
 	}
 	else if (map[n / 9][n % 9] != 0)//已填充
@@ -81,7 +80,7 @@ void calculation(int n)
 				occupy[tag[x][y]][i] = 1;
 				calculation(n + 1);//继续递归求解
 				//求解完毕，层层回退
-				if (flag == true)
+				if (flag != 0)
 					return;
 				//还原
 				map[x][y] = 0;

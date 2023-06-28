@@ -4,11 +4,8 @@
 #include<algorithm>
 using namespace std;
 
-static char buffer[165000000];//»º³å×Ö·û
-static int pos;//»º³å×Ö·û´®µÄµ±Ç°Ğ´ÈëÎ»ÖÃ
-
-static void Init();
-void create_shudu(int n);
+static void init_rows();
+bool create_shudu(int n, string name= "shudu.txt");
 void translate_row(int trans_13, int trans_46, int trans_79, bool flag);
 
 
