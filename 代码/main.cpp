@@ -5,7 +5,7 @@
 using namespace std;
 
 /*
-´¦ÀíÃüÁîĞĞÊäÈë
+å¤„ç†å‘½ä»¤è¡Œè¾“å…¥
 */
 
 void help()
@@ -14,16 +14,16 @@ void help()
 }
 int convert_num(char* s)
 {
-	/*½«ÊäÈëµÄÊı×Ö×ªÎªintĞÍ*/
+	/*å°†è¾“å…¥çš„æ•°å­—è½¬ä¸ºintå‹*/
 	int len = strlen(s);
-	if (len >= 7 && strcmp(s, "1000000"))//´óÓÚ1e6µÄÕûÊı·Ç·¨
+	if (len >= 7 && strcmp(s, "1000000"))//å¤§äº1e6çš„æ•´æ•°éæ³•
 		return -1;
-	else if (s[0] == '0')//0ºÍÇ°×º0·Ç·¨
+	else if (s[0] == '0')//0å’Œå‰ç¼€0éæ³•
 		return -1;
 	int num = 0;
 	for (int i = 0; i < len; i++)
 	{
-		if (!isdigit(s[i]))//·ÇÊı×Ö×Ö·û·Ç·¨
+		if (!isdigit(s[i]))//éæ•°å­—å­—ç¬¦éæ³•
 			return -1;
 		else   num = num * 10 + s[i] - '0';
 	}
@@ -31,15 +31,15 @@ int convert_num(char* s)
 }
 int find_min(char* s)
 {
-	/*½«×îĞ¡ÍÚ¶´Êı×Ö×ªÎªintĞÍ*/
+	/*å°†æœ€å°æŒ–æ´æ•°å­—è½¬ä¸ºintå‹*/
 	int len = strlen(s);
-	if (s[0] == '0')//0ºÍÇ°×º0·Ç·¨
+	if (s[0] == '0')//0å’Œå‰ç¼€0éæ³•
 		return -1;
 	int num = 0;
 	for (int i = 0; i < len; i++)
 	{
 		if (s[i] == '-')break;
-		else if (!isdigit(s[i]))//·ÇÊı×Ö×Ö·û·Ç·¨
+		else if (!isdigit(s[i]))//éæ•°å­—å­—ç¬¦éæ³•
 			return -1;
 		else   num = num * 10 + s[i] - '0';
 	}
@@ -47,7 +47,7 @@ int find_min(char* s)
 }
 int find_max(char* s)
 {
-	/*½«×î´óÍÚ¶´Êı×Ö×ªÎªintĞÍ*/
+	/*å°†æœ€å¤§æŒ–æ´æ•°å­—è½¬ä¸ºintå‹*/
 	int i;
 	int len = strlen(s);
 	for (i = 0; i < len; i++)
@@ -58,12 +58,12 @@ int find_max(char* s)
 			break;
 		}
 	}
-	if (s[i] == '0')//0ºÍÇ°×º0·Ç·¨
+	if (s[i] == '0')//0å’Œå‰ç¼€0éæ³•
 		return -1;
 	int num = 0;
 	for (; i < len; i++)
 	{
-		if (!isdigit(s[i]))//·ÇÊı×Ö×Ö·û·Ç·¨
+		if (!isdigit(s[i]))//éæ•°å­—å­—ç¬¦éæ³•
 			return -1;
 		else   num = num * 10 + s[i] - '0';
 	}
@@ -71,108 +71,111 @@ int find_max(char* s)
 }
 int main(int argc, char* argv[])
 {
-	clock_t start = clock();
-	if (argc < 3)//²ÎÊıÊıÁ¿³ö´í
+	int unittest = false;
+	if (argc < 3)//å‚æ•°æ•°é‡å‡ºé”™
 	{
-		cout << "ÇëÊäÈëÕıÈ·µÄÖ¸Áî¡£" << endl;
+		cout << "è¯·è¾“å…¥æ­£ç¡®çš„æŒ‡ä»¤ã€‚" << endl;
 		help();
 		return 0;
 	}
 
-	if (strcmp(argv[1], "-c") == 0)//Éú³ÉÖÕ¾Ö
-	{	
-		if (argc != 3)//²ÎÊıÊıÁ¿³ö´í
+	if (strcmp(argv[1], "-c") == 0)//ç”Ÿæˆç»ˆå±€
+	{
+		if (argc != 3)//å‚æ•°æ•°é‡å‡ºé”™
 		{
-			cout << "-cºó²ÎÊı½öÎªÖÕ¾Ö¸öÊı" << endl;
+			cout << "-cåå‚æ•°ä»…ä¸ºç»ˆå±€ä¸ªæ•°" << endl;
 			help();
 			return 0;
 		}
-		//¼ì²éargv[2]£¬Èç¹ûºÏ·¨£¬·µ»Ø¶ÔÓ¦ÕûÊı£»Èç¹û²»ºÏ·¨£¬·µ»Ø-1
+		//æ£€æŸ¥argv[2]ï¼Œå¦‚æœåˆæ³•ï¼Œè¿”å›å¯¹åº”æ•´æ•°ï¼›å¦‚æœä¸åˆæ³•ï¼Œè¿”å›-1
 		int num = convert_num(argv[2]);
-		if (num == -1)//argv[2]²»ºÏ·¨
+		if (num == -1)//argv[2]ä¸åˆæ³•
 		{
-			cout << "²ÎÊı²»ºÏ·¨£¬-cºó²ÎÊıÎªÖÕ¾Ö¸öÊı,·¶Î§1-1000000" << endl;
+			cout << "å‚æ•°ä¸åˆæ³•ï¼Œ-cåå‚æ•°ä¸ºç»ˆå±€ä¸ªæ•°,èŒƒå›´1-1000000" << endl;
 			return 0;
 		}
-		else//argv[2]ºÏ·¨
+		else//argv[2]åˆæ³•
 		{
 			if (create_shudu(num))
 			{
-				cout << "´´½¨Êı¶ÀÖÕ¾Ö³É¹¦" << endl;
+				cout << "åˆ›å»ºæ•°ç‹¬ç»ˆå±€æˆåŠŸ" << endl;
+				unittest = true;
 			}
 		}
 	}
-	else if (strcmp(argv[1], "-s") == 0)//½âÊı¶À
+	else if (strcmp(argv[1], "-s") == 0)//è§£æ•°ç‹¬
 	{
-		if (argc != 3)//²ÎÊıÊıÁ¿³ö´í
+		if (argc != 3)//å‚æ•°æ•°é‡å‡ºé”™
 		{
-			cout << "-sºó²ÎÊı½öÎªÊı¶ÀÂ·¾¶" << endl;
+			cout << "-såå‚æ•°ä»…ä¸ºæ•°ç‹¬è·¯å¾„" << endl;
 			help();
 			return 0;
 		}
 		solve_shudu(argv[2]);
+		unittest = true;
 	}
-	else if (strcmp(argv[1], "-n") == 0)//Éú³ÉÊı¶ÀÓÎÏ·
+	else if (strcmp(argv[1], "-n") == 0)//ç”Ÿæˆæ•°ç‹¬æ¸¸æˆ
 	{
-		int level = 0;//ÄÑ¶È
-		int minhole = 0;//×îĞ¡¿ÓÊı
-		int maxhole = 0;//×î´ó¿ÓÊı
+		int level = 0;//éš¾åº¦
+		int minhole = 0;//æœ€å°å‘æ•°
+		int maxhole = 0;//æœ€å¤§å‘æ•°
 		bool only = false;
 		int num = convert_num(argv[2]);
 		if (num < 0 || num>10000)
 		{
-			cout << "²ÎÊı²»ºÏ·¨£¬-nºó²ÎÊıÎªÓÎÏ·¸öÊı,·¶Î§1-10000" << endl;
+			cout << "å‚æ•°ä¸åˆæ³•ï¼Œ-nåå‚æ•°ä¸ºæ¸¸æˆä¸ªæ•°,èŒƒå›´1-10000" << endl;
 			return 0;
 		}
 		if (argc > 3)
 		{
-			if (strcmp(argv[3], "-m") == 0)//ÓÎÏ·ÄÑ¶È
+			if (strcmp(argv[3], "-m") == 0)//æ¸¸æˆéš¾åº¦
 			{
 				level = convert_num(argv[4]);
-				if (level <1||level>3)//argv[4]²»ºÏ·¨
+				if (level < 1 || level>3)//argv[4]ä¸åˆæ³•
 				{
-					cout << "ÄÑ¶ÈÑ¡Ôñ´íÎó£¬½öÓĞ1-3ÈıÖÖÄÑ¶È" << endl;
+					cout << "éš¾åº¦é€‰æ‹©é”™è¯¯ï¼Œä»…æœ‰1-3ä¸‰ç§éš¾åº¦" << endl;
 					return 0;
 				}
 			}
-			else if (strcmp(argv[3], "-r") == 0)//ÓÎÏ·ÍÚ¿ÓÊı
+			else if (strcmp(argv[3], "-r") == 0)//æ¸¸æˆæŒ–å‘æ•°
 			{
 				minhole = find_min(argv[4]);
 				maxhole = find_max(argv[4]);
-				if (maxhole==-1||minhole < 20 || maxhole>55 || minhole > maxhole)
+				if (maxhole == -1 || minhole < 20 || maxhole>55 || minhole > maxhole)
 				{
-					cout << "²ÎÊı´íÎó£¬ÍÚ¶´¸öÊı·¶Î§Îª20-55" << endl;
+					cout << "å‚æ•°é”™è¯¯ï¼ŒæŒ–æ´ä¸ªæ•°èŒƒå›´ä¸º20-55" << endl;
 					return 0;
 				}
 			}
-			else if (strcmp(argv[3], "-u") == 0)//ÓÎÏ·½âÎ¨Ò»
+			else if (strcmp(argv[3], "-u") == 0)//æ¸¸æˆè§£å”¯ä¸€
 			{
 				only = true;
 			}
 		}
 		if (argc > 5)
 		{
-			if (strcmp(argv[3], "-m") == 0)//ÓÎÏ·ÄÑ¶È
+			if (strcmp(argv[3], "-m") == 0)//æ¸¸æˆéš¾åº¦
 			{
 				level = convert_num(argv[4]);
-				if (level < 1 || level>3)//argv[4]²»ºÏ·¨
+				if (level < 1 || level>3)//argv[4]ä¸åˆæ³•
 				{
-					cout << "ÄÑ¶ÈÑ¡Ôñ´íÎó£¬½öÓĞ1-3ÈıÖÖÄÑ¶È" << endl;
+					cout << "éš¾åº¦é€‰æ‹©é”™è¯¯ï¼Œä»…æœ‰1-3ä¸‰ç§éš¾åº¦" << endl;
 					return 0;
 				}
 			}
-			if (strcmp(argv[3], "-r") == 0)//ÓÎÏ·ÍÚ¿ÓÊı
+			if (strcmp(argv[3], "-r") == 0)//æ¸¸æˆæŒ–å‘æ•°
 			{
 				minhole = find_min(argv[4]);
 				maxhole = find_max(argv[4]);
 			}
 		}
-		create_game(num, level , minhole , maxhole, only);
+		create_game(num, level, minhole, maxhole, only);
+		unittest = true;
 	}
-	else//argv[1]¼È²»ÊÇ"-c"£¬Ò²²»ÊÇ"-s",Ò²²»ÊÇ"-n"
+	else//argv[1]æ—¢ä¸æ˜¯"-c"ï¼Œä¹Ÿä¸æ˜¯"-s",ä¹Ÿä¸æ˜¯"-n"
 	{
-		cout << "ÇëÊäÈëÕıÈ·µÄÖ¸Áî¡£" << endl;
-		return 0;
+		cout << "è¯·è¾“å…¥æ­£ç¡®çš„æŒ‡ä»¤ã€‚" << endl;
 	}
+	return unittest;
 }
 
